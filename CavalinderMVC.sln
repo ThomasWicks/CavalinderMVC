@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.438
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CavalinderMVC", "CavalinderMVC\CavalinderMVC.csproj", "{16BB0325-46F0-4850-B38A-2453BC075A9B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{16BB0325-46F0-4850-B38A-2453BC075A9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16BB0325-46F0-4850-B38A-2453BC075A9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16BB0325-46F0-4850-B38A-2453BC075A9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16BB0325-46F0-4850-B38A-2453BC075A9B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E480F0F5-F23D-40FB-BAF4-7086C09C6162}
+	EndGlobalSection
+EndGlobal

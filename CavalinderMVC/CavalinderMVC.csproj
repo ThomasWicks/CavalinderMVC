@@ -177,6 +177,8 @@
     <Compile Include="Models\Horse.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\GenericService.cs" />
+    <Compile Include="Service\IGenericService.cs" />
     <Compile Include="ViewModel\UsuarioViewModel.cs" />
     <Compile Include="ViewModel\HorseViewModel.cs" />
   </ItemGroup>

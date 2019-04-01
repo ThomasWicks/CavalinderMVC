@@ -22,8 +22,32 @@ namespace CavalinderMVC.AppService
 
         public List<string> Delete(int id)
         {
-            throw new NotImplementedException();
+            List<string> errors = new List<string>();
+
+            try
+            {
+                
+
+
+
+                BeginTransaction();
+                errors = _usuarioService.Delete(id);
+                if (errors?.Count() == 0)
+                {
+                    SaveChanges();
+                    Commit();
+
+                }
+            }
+            catch (Exception e)
+            {
+                Rollback();
+                errors.Add("Ocorreu um erro no Cadastro");
+            }
+            return errors;
+
         }
+    
 
         public IEnumerable<UsuarioViewModel> Get(Expression<Func<UsuarioViewModel, bool>> filter = null, Expression<Func<IQueryable<UsuarioViewModel>, IOrderedQueryable<UsuarioViewModel>>> orderBy = null, string includeProperties = "")
         {
@@ -37,7 +61,7 @@ namespace CavalinderMVC.AppService
 
         public UsuarioViewModel GetById(int id)
         {
-            throw new NotImplementedException();
+            return AutoMapper.Mapper.Map<Usuario, UsuarioViewModel>(_usuarioService.GetById(id));
         }
 
         public List<string> Insert(UsuarioViewModel obj)
@@ -72,7 +96,32 @@ namespace CavalinderMVC.AppService
 
         public List<string> Update(UsuarioViewModel obj)
         {
-            throw new NotImplementedException();
+            List<string> errors = new List<string>();
+            try
+            {
+
+                Usuario usuario = AutoMapper.Mapper.Map<UsuarioViewModel, Usuario>(obj);
+                if (errors?.Count > 0)
+                {
+                    return errors;
+                }
+                else
+                {
+                    BeginTransaction();
+                    errors = _usuarioService.Update(usuario);
+                    if (errors?.Count() == 0)
+                    {
+                        SaveChanges();
+                        Commit();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Rollback();
+                errors.Add("Ocorreu um erro no Cadastro");
+            }
+            return errors;
         }
     }
 }

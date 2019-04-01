@@ -55,44 +55,48 @@ namespace CavalinderMVC.Controllers
         // GET: Usuario/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+             UsuarioViewModel usuarioViewModel = new UsuarioViewModel();
+            usuarioViewModel = _usuarioAppService.GetById(id);
+            return View(usuarioViewModel);
         }
 
         // POST: Usuario/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(UsuarioViewModel usuarioViewModel)
         {
             try
             {
-                // TODO: Add update logic here
+                errors = _usuarioAppService.Update(usuarioViewModel);
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch(Exception e)
             {
-                return View();
+                return View(usuarioViewModel);
             }
         }
 
         // GET: Usuario/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            UsuarioViewModel usuarioViewModel = new UsuarioViewModel();
+            usuarioViewModel = _usuarioAppService.GetById(id);
+            return View(usuarioViewModel);
         }
 
         // POST: Usuario/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, UsuarioViewModel usuarioViewModel)
         {
             try
             {
-                // TODO: Add delete logic here
+                errors = _usuarioAppService.Delete(id);
 
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return View(usuarioViewModel);
             }
         }
     }

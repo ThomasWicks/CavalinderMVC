@@ -1,5 +1,7 @@
 ﻿using CavalinderMVC.AppService.Interfaces;
 using CavalinderMVC.Controllers.Interfaces;
+using CavalinderMVC.Models;
+using CavalinderMVC.Service;
 using CavalinderMVC.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -11,12 +13,12 @@ namespace CavalinderMVC.AppService
 {
     public class HorseAppService : GenericAppService, IHorseAppService
     {
-        private readonly IHorseRepository _horseRepository;
+        private readonly IGenericService<Horse> _horseService;
 
-        public HorseAppService(IUnitOfWork uow, IHorseRepository horseRepository)
+        public HorseAppService(IUnitOfWork uow, IGenericService<Horse> horseService)
             : base(uow)
         {
-            _horseRepository = horseRepository;
+            _horseService = horseService;
         }
 
         public List<string> Delete(int id)

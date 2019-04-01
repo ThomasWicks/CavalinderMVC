@@ -10,7 +10,6 @@ using System.Web.Mvc;
 
 namespace CavalinderMVC.Controllers
 {
-    //teste
     public class UsuarioController : Controller
     {
         private readonly IUsuarioAppService _usuarioAppService;

@@ -31,6 +31,33 @@ namespace CavalinderMVC.Controllers
             return View();
         }
 
+        // GET: Usuario/Login
+        public ActionResult Login()
+        {
+            return View(new UsuarioViewModelLogin());
+        }
+
+        // POST: Usuario/Login
+        [HttpPost]
+        public ActionResult Login(UsuarioViewModelLogin usuarioLogin)
+        {
+            try
+          {
+                errors = _usuarioAppService.Logar(usuarioLogin);
+                if(errors.Count <= 0)
+                {
+                return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View(usuarioLogin);
+                }
+            }
+            catch (Exception e)
+            {
+                return View(usuarioLogin);
+            }
+        }
         // GET: Usuario/Create
         public ActionResult Create()
         {
@@ -55,7 +82,7 @@ namespace CavalinderMVC.Controllers
         // GET: Usuario/Edit/5
         public ActionResult Edit(int id)
         {
-             UsuarioViewModel usuarioViewModel = new UsuarioViewModel();
+            UsuarioViewModel usuarioViewModel = new UsuarioViewModel();
             usuarioViewModel = _usuarioAppService.GetById(id);
             return View(usuarioViewModel);
         }
@@ -70,7 +97,7 @@ namespace CavalinderMVC.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return View(usuarioViewModel);
             }

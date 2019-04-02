@@ -16,6 +16,9 @@ namespace CavalinderMVC
                 {
                     #region  Usuario 
                     cfg.CreateMap<Usuario, UsuarioViewModel>().ReverseMap();
+                    cfg.CreateMap<Usuario, UsuarioViewModelLogin>().ReverseMap();
+                    cfg.CreateMap<UsuarioViewModel, UsuarioViewModelLogin>().ReverseMap();
+
                     #endregion
 
                     #region  Horse 

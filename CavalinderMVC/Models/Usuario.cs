@@ -11,8 +11,8 @@ namespace CavalinderMVC.Models
         public int Id { get; set; }
         public string email { get; set; }
         public string gender { get; set; }
-        //[DataType(DataType.DateTime)]
-        //public DateTime bithday { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime bithday { get; set; }
         public string country { get; set; }
         public string password { get; set; }
         public string fullname { get; set; }

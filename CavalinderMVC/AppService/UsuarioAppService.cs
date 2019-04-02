@@ -26,7 +26,7 @@ namespace CavalinderMVC.AppService
 
             try
             {
-                
+
 
 
 
@@ -47,11 +47,11 @@ namespace CavalinderMVC.AppService
             return errors;
 
         }
-    
+
 
         public IEnumerable<UsuarioViewModel> Get(Expression<Func<UsuarioViewModel, bool>> filter = null, Expression<Func<IQueryable<UsuarioViewModel>, IOrderedQueryable<UsuarioViewModel>>> orderBy = null, string includeProperties = "")
         {
-            throw new NotImplementedException();
+            return AutoMapper.Mapper.Map<IEnumerable<Usuario>, IEnumerable<UsuarioViewModel>>(_usuarioService.Get(AutoMapper.Mapper.Map<Expression<Func<UsuarioViewModel, bool>>, Expression<Func<Usuario, bool>>>(filter), null, string.Empty));
         }
 
         public IEnumerable<UsuarioViewModel> GetAll()
@@ -62,6 +62,39 @@ namespace CavalinderMVC.AppService
         public UsuarioViewModel GetById(int id)
         {
             return AutoMapper.Mapper.Map<Usuario, UsuarioViewModel>(_usuarioService.GetById(id));
+        }
+
+        public IEnumerable<Usuario> GetByName(string name)
+        {
+            Expression<Func<Usuario, bool>> filter =
+                (Usuario e) => e.email == name;
+            return _usuarioService.Get(filter);
+        }
+
+        public List<string> Logar(UsuarioViewModelLogin obj)
+        {
+            List<string> errors = new List<string>();
+            UsuarioViewModel usuarioViewModel = AutoMapper.Mapper.Map<UsuarioViewModelLogin, UsuarioViewModel>(obj);
+            Usuario usuario = AutoMapper.Mapper.Map<UsuarioViewModel, Usuario>(usuarioViewModel);
+            usuario = GetByName(usuario.email).First();
+            try
+            {
+                if(usuario.password == obj.password && usuario.email == obj.email)
+                {
+                    return errors;
+                }
+                else
+                {
+                    errors.Add("Email ou senha incorretos");
+                    return errors;
+                }
+            }
+            catch (Exception e)
+            {
+                Rollback();
+                errors.Add("Ocorreu um erro no Login");
+                return errors;
+            }
         }
 
         public List<string> Insert(UsuarioViewModel obj)

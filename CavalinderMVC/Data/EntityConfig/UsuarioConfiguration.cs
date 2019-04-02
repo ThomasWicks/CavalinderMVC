@@ -25,8 +25,8 @@ namespace CavalinderMVC.Data.EntityConfig
                     .IsRequired()
                     .HasMaxLength(150);
 
-            //Property(u => u.bithday)
-            //        .IsRequired();
+            Property(u => u.bithday)
+                    .IsRequired();
 
             Property(u => u.country)
                     .IsRequired()

@@ -87,7 +87,7 @@ namespace CavalinderMVC.Controllers
             try
             {
                 errors = _usuarioAppService.Insert(usuario);
-                return RedirectToAction("Index");
+                return RedirectToAction("Login");
             }
             catch (Exception e)
             {
@@ -109,8 +109,10 @@ namespace CavalinderMVC.Controllers
         {
             try
             {
+                usuarioViewModel = _usuarioAppService.GetById(usuarioViewModel.Id);
                 errors = _usuarioAppService.Update(usuarioViewModel);
-
+                Usuario usuario = AutoMapper.Mapper.Map<UsuarioViewModel, Usuario>(usuarioViewModel);
+                TempData["usuarioIndex"] = usuario;
                 return RedirectToAction("Index");
             }
             catch (Exception e)

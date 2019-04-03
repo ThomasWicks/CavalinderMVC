@@ -112,8 +112,15 @@ namespace CavalinderMVC.Controllers
                 usuarioViewModel = _usuarioAppService.GetById(usuarioViewModel.Id);
                 errors = _usuarioAppService.Update(usuarioViewModel);
                 Usuario usuario = AutoMapper.Mapper.Map<UsuarioViewModel, Usuario>(usuarioViewModel);
-                TempData["usuarioIndex"] = usuario;
-                return RedirectToAction("Index");
+                if (usuarioViewModel != null)
+                {
+                    TempData["usuarioIndex"] = usuario;
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("Login");
+                }
             }
             catch (Exception e)
             {

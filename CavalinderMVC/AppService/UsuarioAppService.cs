@@ -71,31 +71,31 @@ namespace CavalinderMVC.AppService
             return _usuarioService.Get(filter);
         }
 
-        public List<string> Logar(UsuarioViewModelLogin obj)
-        {
-            List<string> errors = new List<string>();
-            UsuarioViewModel usuarioViewModel = AutoMapper.Mapper.Map<UsuarioViewModelLogin, UsuarioViewModel>(obj);
-            Usuario usuario = AutoMapper.Mapper.Map<UsuarioViewModel, Usuario>(usuarioViewModel);
-            usuario = GetByName(usuario.email).First();
-            try
-            {
-                if(usuario.password == obj.password && usuario.email == obj.email)
-                {
-                    return errors;
-                }
-                else
-                {
-                    errors.Add("Email ou senha incorretos");
-                    return errors;
-                }
-            }
-            catch (Exception e)
-            {
-                Rollback();
-                errors.Add("Ocorreu um erro no Login");
-                return errors;
-            }
-        }
+        //public List<string> Logar(UsuarioViewModelLogin obj)
+        //{
+        //    List<string> errors = new List<string>();
+        //    UsuarioViewModel usuarioViewModel = AutoMapper.Mapper.Map<UsuarioViewModelLogin, UsuarioViewModel>(obj);
+        //    Usuario usuario = AutoMapper.Mapper.Map<UsuarioViewModel, Usuario>(usuarioViewModel);
+        //    usuario = GetByName(usuario.email).First();
+        //    try
+        //    {
+        //        if(usuario.password == obj.password && usuario.email == obj.email)
+        //        {
+        //            return errors;
+        //        }
+        //        else
+        //        {
+        //            errors.Add("Email ou senha incorretos");
+        //            return errors;
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Rollback();
+        //        errors.Add("Ocorreu um erro no Login");
+        //        return errors;
+        //    }
+        //}
 
         public List<string> Insert(UsuarioViewModel obj)
         {

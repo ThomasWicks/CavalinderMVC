@@ -22,7 +22,17 @@ namespace CavalinderMVC.Controllers
         // GET: Usuario
         public ActionResult Index()
         {
-            return View(_usuarioAppService.GetAll());
+            Usuario usuarioIndex = (Usuario)TempData["usuarioIndex"];
+            UsuarioViewModel usuarioViewModel = AutoMapper.Mapper.Map<Usuario, UsuarioViewModel>(usuarioIndex);
+            if (usuarioViewModel != null)
+            {
+            return View(usuarioViewModel);
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+
         }
 
         // GET: Usuario/Details/5
@@ -42,14 +52,20 @@ namespace CavalinderMVC.Controllers
         public ActionResult Login(UsuarioViewModelLogin usuarioLogin)
         {
             try
-          {
-                errors = _usuarioAppService.Logar(usuarioLogin);
-                if(errors.Count <= 0)
+            {
+                List<string> errors = new List<string>();
+                UsuarioViewModel usuarioViewModel = AutoMapper.Mapper.Map<UsuarioViewModelLogin, UsuarioViewModel>(usuarioLogin);
+                Usuario usuario = AutoMapper.Mapper.Map<UsuarioViewModel, Usuario>(usuarioViewModel);
+                usuario = _usuarioAppService.GetByName(usuario.email).First();
+
+                if (usuarioLogin.email == usuario.email && usuarioLogin.password == usuario.password)
                 {
-                return RedirectToAction("Index");
+                    TempData["usuarioIndex"] = usuario;
+                    return RedirectToAction("Index");
                 }
                 else
                 {
+                    errors.Add("Email ou senha incorretos");
                     return View(usuarioLogin);
                 }
             }

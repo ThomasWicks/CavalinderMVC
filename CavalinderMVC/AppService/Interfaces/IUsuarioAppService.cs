@@ -12,7 +12,7 @@ namespace CavalinderMVC.AppService
 {
     public interface IUsuarioAppService : IGenericAppService<UsuarioViewModel>
     {
-        List<string> Logar(UsuarioViewModelLogin obj);
+        //List<string> Logar(UsuarioViewModelLogin obj);
         IEnumerable<Usuario> GetByName(string name);
 
     }
